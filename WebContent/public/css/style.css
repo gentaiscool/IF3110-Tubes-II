@@ -1,0 +1,131 @@
+@CHARSET "ISO-8859-1";
+
+@font-face
+{
+	font-family: ;
+	src: url(sansation_light.woff);
+}
+
+.container
+{
+	background-color: black;
+	color:white;
+} 
+
+.h2
+{
+	color: #FFFFFF;
+}
+
+.navigation
+{
+	display:block;
+	padding-left:280px;
+	height:80px;
+	background-color:#333333;
+}
+
+#navigator
+{
+	font-size: 20px;
+	display:inline-block;
+	height:70px;
+	text-align:left;
+	padding: 30px 0px 0px 0px;
+	margin-left:50px;
+	color: white;
+}
+
+#navigator:hover {
+    background: #feffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #feffff 0%, #cbccdb 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feffff), color-stop(100%,#cbccdb)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #feffff 0%,#cbccdb 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #feffff 0%,#cbccdb 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #feffff 0%,#cbccdb 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #feffff 0%,#cbccdb 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#cbccdb',GradientType=0 ); /* IE6-9 */
+	color:#000000;
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.board
+{
+	position:absolute;
+	top:150;
+	left:72%;	
+	color:white;
+}
+
+.words
+{
+	position:absolute;
+	left:73%;
+	top:1%;
+	color:white;	
+}
+
+.logo
+{
+	display:block;
+}
+
+.content
+{
+	background-color:#AAAAAA;
+	margin: 30px 0px 0px 0px;
+	height:500px;
+}
+
+.footer
+{
+	font-size:20px;
+	color:#FFFFFF;	
+}
+
+#contents
+{
+	display:inline-block;
+	text-align:left;
+	padding-left: 150px;
+	padding-top: 200px;
+}
+
+.barang
+{
+	display:inline-block;
+	text-align:left;	
+	margin-left:50px;
+}
+
+.detailBarang
+{
+	margin-left:200px;
+	margin-top:20px;
+	background-color:orange;
+}
+
+.segment
+{
+	display:inline-block;
+	text-align:left;
+	margin-left:50px;
+}
+
+.title
+{
+	font-size:30px;
+	margin-left:200px;
+	margin-top:10px;
+}
+
+#loginreport{
+	text-align:center;
+	margin-top:250px;
+	color : #AAA;
+	font-size:20px;
+	font-family:monospace;
+}
+
+#logusnm::-webkit-input-placeholder { font-style:italic; letter-spacing:3px;}
+#logpwd::-webkit-input-placeholder { font-style:italic; letter-spacing:3px;}
