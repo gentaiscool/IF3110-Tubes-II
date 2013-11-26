@@ -15,21 +15,8 @@
 	<%@ page import="helloJsp.model.ModelInventori"%>
 	<%@include file="templates/header.jsp"%>
 
-	<div class="leftbar">
+	<div class="fullbar">
 		<h2>VIEW CART</h2>
-	</div>
-
-	<div class="centerbar">
-		<h2>YOUR CART</h2>
-		<%
-			if (session.getAttribute("shoppingCart") != null) {
-				ShoppingCart sc = (ShoppingCart) session.getAttribute("shoppingCart");
-				out.println("");
-				for (int i = 0; i < sc.getItems().size(); i++) {
-					out.println("("+ (i + 1) + ") " + sc.getItems().get(i).getQuantity() + "x " + sc.getItems().get(i).getIdItem() + " Rp.1000,-<br/>");
-				}
-			}
-		%>
 	</div>
 	<%@include file="templates/footer.jsp"%>
 </body>

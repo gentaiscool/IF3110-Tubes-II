@@ -5,6 +5,8 @@ import helloJsp.object.ShoppingCart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -29,15 +31,17 @@ public class Cart extends HttpServlet{
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		int quantity = 0, idItem = 0;
+		int quantity = 0, idItem = 0, stock = 0;
 		String desc = "";
 		
 		quantity = Integer.parseInt(request.getParameter("quantity"));
 		idItem =  Integer.parseInt(request.getParameter("id"));
 		desc = request.getParameter("desc");
+		stock = Integer.parseInt(request.getParameter("stock"));
 		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user") == null){
+	
+		if(stock < quantity){
 			//fail
 			out.println(-1);
 		} else{

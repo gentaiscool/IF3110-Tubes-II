@@ -38,26 +38,42 @@
 
 		out.println("<div class='leftbar'>");
 		out.println("<h2>" + category + "</h2>");
+	%>
+	<div class="sort">
+		<button
+			onClick="location.href='Category?idPage=<%out.print(idKat);%>&type=1'">Sort
+			by Nama</button>
+		<button
+			onClick="location.href='Category?idPage=<%out.print(idKat);%>&type=2'">Sort
+			by Harga</button>
+		<br />
+		<br />
+	</div>
+
+	<%
 		for (int i = 0; i < TabelBarang.size(); i++) {
-			out.println("<div class=\"barang\">");
-			out.println("<img width=100px height=100px src=public/img/" + category.toLowerCase() + "/" + TabelBarang.get(i).getGambar() + " alt=" + TabelBarang.get(i).getNama_inventori() + " width = 150 height=300>");
-			out.println("<br/><a href=detailBarang.jsp?idBarang=" + i + ">" + TabelBarang.get(i).getNama_inventori() + "</a><br>");
-			out.println("Harga: " + TabelBarang.get(i).getHarga());
-			out.println("<br/>Stok: " + TabelBarang.get(i).getJumlah());
-			if (session.getAttribute("user") != null) {
-				if (session.getAttribute("user").equals("admin")) {
-					out.println("tes admin<br>");
-					out.println("<button onClick='location.href=EditBarang?idBarang='" + i + ">EDIT</button>");
-				} else {
-					out.println("<br/><input id='num' type='number' size=5 placeholder='jumlah'>");
-					out.println("<input type='hidden' id='idPage' name='idPage' value="+idKat+">");
-					out.println("<input type='submit' value='beli' onClick=\"addToCart(1,1,'a')\">");
+			if (TabelBarang.get(i).getId_kategori() == idKat) {
+				out.println("<div class=\"barang\">");
+				out.println("<img width=100px height=100px src=public/img/" + category.toLowerCase() + "/" + TabelBarang.get(i).getGambar() + " alt=" + TabelBarang.get(i).getNama_inventori() + " width = 150 height=300>");
+				out.println("<br/><a href=detailBarang.jsp?idBarang=" + i + ">" + TabelBarang.get(i).getNama_inventori() + "</a><br>");
+				out.println("Harga: " + TabelBarang.get(i).getHarga());
+				out.println("<br/>Stok: " + TabelBarang.get(i).getJumlah());
+				if (session.getAttribute("user") != null) {
+					if (session.getAttribute("user").equals("admin")) {
+						out.println("tes admin<br>");
+						out.println("<button onClick='location.href=EditBarang?idBarang='" + i + ">EDIT</button>");
+					} else {
+						out.println("<br/><input id='num"+i+"' type='number' size=5 placeholder='jumlah'>");
+						out.println("<input type='hidden' id='idPage' name='idPage' value=" + idKat + ">");
+						out.println("<input type='submit' value='beli' onClick=\"addToCart(document.getElementById('num"+i+"').value,"+(i+1)+",'', "+TabelBarang.get(i).getJumlah()+")\">");
+					}
 				}
+				out.println("</div>");
 			}
-			out.println("</div>");
 		}
 		out.println("</div>");
 	%>
+
 
 	<div class="centerbar">
 		<h2>YOUR CART</h2>
@@ -66,7 +82,14 @@
 				ShoppingCart sc = (ShoppingCart) session.getAttribute("shoppingCart");
 				out.println("");
 				for (int i = 0; i < sc.getItems().size(); i++) {
-					out.println("(" + (i + 1) + ") " + sc.getItems().get(i).getQuantity() + "x " + sc.getItems().get(i).getIdItem() + " Rp.1000,-<br/>");
+					int temp = 0;
+					for (int j = 0; j < TabelBarang.size(); j++) {
+						if(TabelBarang.get(j).getId_inventori() == sc.getItems().get(i).getIdItem()){
+							temp = j;
+							break;
+						}
+					}
+					out.println("(" + (i + 1) + ") " + sc.getItems().get(i).getQuantity() + "x " + TabelBarang.get(temp).getNama_inventori()+ " Rp.1000,-<br/>");
 				}
 			}
 		%>
