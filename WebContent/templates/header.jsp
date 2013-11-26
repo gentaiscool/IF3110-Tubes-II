@@ -1,12 +1,4 @@
 <div class="header">
-	<div class="board">
-		<img src="public/img/board.png" width="250" height="120">
-	</div>
-	<div class="words">
-		<p>hello gentaiscool</p>
-		<p>view profile/atw yang lain</p>
-		<p>cart</p>
-	</div>
 	<div class="logo">
 		<a href="./index.jsp"><img src="public/img/canopy.png" width="100%"></a>
 	</div>
@@ -27,4 +19,42 @@
 			<div id="navigator">BEVERAGES</div>
 		</a>
 	</div>
+	<%
+		//allow access only if session exists
+		String user = null;
+		String userName = null;
+		String sessionID = null;
+		if (session.getAttribute("user") == null) {
+			//response.sendRedirect("index.jsp");
+			%>
+			<div class="words">
+				<h3>
+				Ciao! Welcome to Chintalian! :3
+				</h3>
+				<button onClick="location.href='login.jsp'">Login</button>
+				<button onClick="location.href='registrasi.jsp'">Registrasi user</button>
+			</div>
+		<%
+		} else{
+			user = (String) session.getAttribute("user");		
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if (cookie.getName().equals("user"))
+						userName = cookie.getValue();
+					if (cookie.getName().equals("JSESSIONID"))
+						sessionID = cookie.getValue();
+				}
+			}
+			%>
+			<div class="words">
+				<h3>
+				Hi
+				<%=userName%>, Welcome to Chintalian! :3
+				</h3>
+				<button onClick="location.href='Logout'">Logout</button>
+			</div>
+			<%
+		}
+	%>
 </div>

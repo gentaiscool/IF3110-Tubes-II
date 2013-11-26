@@ -9,54 +9,39 @@
 </head>
 <body class="container">
 	<%@include file="templates/header.jsp"%>
-	<%
-		//allow access only if session exists
-		String user = null;
-		String userName = null;
-		String sessionID = null;
-		if (session.getAttribute("user") == null) {
-			//response.sendRedirect("index.jsp");
-			%>
-			<h3>
-			Ciao! Welcome to Chintalian! :3
-			</h3>
-			<button onClick="location.href='login.jsp'">Login</button>
-		<%
-		} else{
-			user = (String) session.getAttribute("user");		
-			Cookie[] cookies = request.getCookies();
-			if (cookies != null) {
-				for (Cookie cookie : cookies) {
-					if (cookie.getName().equals("user"))
-						userName = cookie.getValue();
-					if (cookie.getName().equals("JSESSIONID"))
-						sessionID = cookie.getValue();
-				}
-			}
-			%>
-			
-			<h3>
-			Hi
-			<%=userName%>, Welcome to Chintalian! :3
-			</h3>
-			<button onClick="location.href='Logout'">Logout</button>
-			<%
-		}
-	%>
 
-	<!--  <div class="content">
-		<button onClick=""><<</button>
-		<div id="contents">
-			<img src="public/img/logo.png" width="300">
+		<!--  <div class="content">
+			<button onClick=""><<</button>
+			<div id="contents">
+				<img src="public/img/logo.png" width="300">
+			</div>
+			<div id="contents">
+				<img src="public/img/logo.png" width="300">
+			</div>
+			<div id="contents">
+				<img src="public/img/logo.png" width="300">
+			</div>
+			<div id="contents"><button>>></button></div>
+		</div>-->
+	
+	</div>
+	<div class="leftbar">
+		<h3>MOST FAVOURITE MENU</h3>
+	</div>
+	<div class="centerbar">
+		<h2>YOUR CART</h2>
+	</div>
+	<div class="sidebar">
+		<div class="picture">
+			<img src="public/img/cart.png" width="90">
 		</div>
-		<div id="contents">
-			<img src="public/img/logo.png" width="300">
+		<div class="picture">
+			<img src="public/img/user.png" width="90">
 		</div>
-		<div id="contents">
-			<img src="public/img/logo.png" width="300">
+		<div class="picture">
+			<img src="public/img/card.png" width="90">
 		</div>
-		<div id="contents"><button>>></button></div>
-	</div>-->
+	</div>
 	<%@include file="templates/footer.jsp"%>
 </body>
 </html>

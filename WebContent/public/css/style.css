@@ -2,14 +2,15 @@
 
 @font-face
 {
-	font-family: ;
-	src: url(sansation_light.woff);
+	font-family: "crayon";
+	src: url(../fonts/DKCrayonCrumble.ttf) format("truetype");
 }
 
 .container
 {
 	background-color: black;
 	color:white;
+	font-family: crayon;
 } 
 
 .h2
@@ -102,7 +103,7 @@
 {
 	margin-left:200px;
 	margin-top:20px;
-	background-color:orange;
+	background-color:transparent;
 }
 
 .segment
@@ -117,6 +118,47 @@
 	font-size:30px;
 	margin-left:200px;
 	margin-top:10px;
+}
+
+.leftbar
+{
+	width:900px;
+	height:500px;
+	display:inline-block;
+	text-align:left;
+	background-color:transparent;
+	background-color:#DDDDDD;
+	color:#000000;
+	padding-left:10px;
+	font-family:crayon;
+}
+
+.centerbar
+{
+	position:absolute;
+	width:290px;
+	height:500px;
+	display:inline-block;
+	text-align:left;
+	background-color:#DDDDDD;
+	margin-left:5px;
+	padding-left:10px;
+	color:#000000;
+}
+
+.sidebar
+{
+	position:absolute;
+	top:44%;
+	right:0%;
+	background-color:#DDDDDD;
+}
+
+.picture
+{
+	margin-left:10px;
+	margin-top:20px;
+	color:black;
 }
 
 #loginreport{

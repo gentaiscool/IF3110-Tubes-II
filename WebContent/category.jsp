@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="public/css/style.css">
 <title>Insert title here</title>
 </head>
-<body class="container" alink=#FFFFFF vlink=#FFFFFF>
+<body class="container" alink=#000000 vlink=#000000>
 	<%@ page import="java.util.ArrayList" %>
 	<%@ page import="helloJsp.model.ModelInventori" %>
 	<%
@@ -71,8 +71,10 @@
 			category = "DESSERTS";
 		else if(idKat == 5)
 			category = "BEVERAGES";
-		out.println("<h3>"+category+"</h3>");
 		
+		
+		out.println("<div class='leftbar'>");
+		out.println("<h3>"+category+"</h3>");
 		for (int i=0; i<TabelBarang.size(); i++){
 			if (TabelBarang.get(i).getId_kategori() == idKat){
 				out.println("<div class=\"barang\">");
@@ -81,11 +83,27 @@
 				out.println("Harga: " + TabelBarang.get(i).getHarga());
 				out.println("<br/>Stok: " + TabelBarang.get(i).getJumlah());
 				out.println("<form><input type='number' size=5 placeholder='jumlah'>");
-				out.println("<input type='submit' value='beli'></form>");
+				out.println("<input type='submit' name="+TabelBarang.get(i).getId_inventori()+" value='beli'></form>");
 				out.println("</div>");
 			}
 		}
+		out.println("</div>");
 	%>
+	
+	<div class="centerbar">
+		<h2>YOUR CART</h2>
+	</div>
+	<div class="sidebar">
+		<div class="picture">
+			<img src="public/img/cart.png" width="90">
+		</div>
+		<div class="picture">
+			<img src="public/img/user.png" width="90">
+		</div>
+		<div class="picture">
+			<img src="public/img/card.png" width="90">
+		</div>
+	</div>
 	<%@include file="templates/footer.jsp" %>
 </body>
 </html>

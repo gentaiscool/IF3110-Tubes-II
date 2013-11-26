@@ -28,4 +28,8 @@
     <servlet-name>Registrasi</servlet-name>
     <url-pattern>/registrasi</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Cart</servlet-name>
+    <url-pattern>/cart</url-pattern>
+  </servlet-mapping>
 </web-app>
