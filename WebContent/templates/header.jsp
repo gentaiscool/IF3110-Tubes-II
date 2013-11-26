@@ -61,7 +61,7 @@
 			<div class="words">
 				<h3>
 				Hi
-				<%=userName%>, Welcome to Chintalian! :3
+				<a class="light" href="./viewProfile.jsp"><%=userName%></a>, Welcome to Chintalian! :3
 				</h3>
 				<button onClick="location.href='Logout'">Logout</button>
 			</div>

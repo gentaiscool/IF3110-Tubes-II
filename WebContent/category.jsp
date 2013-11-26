@@ -46,8 +46,14 @@
 		<button
 			onClick="location.href='Category?idPage=<%out.print(idKat);%>&type=2'">Sort
 			by Harga</button>
-		<br />
-		<br />
+		<% 
+		if(session.getAttribute("user") != null){
+			if (session.getAttribute("user").equals("admin")) {
+				out.println("<button onClick='location.href=updateBarang?type=2'>add NEW item</button>");
+				}
+		}
+		%>
+		<br /> <br />
 	</div>
 
 	<%
@@ -60,12 +66,11 @@
 				out.println("<br/>Stok: " + TabelBarang.get(i).getJumlah());
 				if (session.getAttribute("user") != null) {
 					if (session.getAttribute("user").equals("admin")) {
-						out.println("tes admin<br>");
-						out.println("<button onClick='location.href=EditBarang?idBarang='" + i + ">EDIT</button>");
+						out.println("<button onClick=\"location.href='EditBarang?idBarang=" + (i+1) + "'\">EDIT</button>");
 					} else {
 						out.println("<br/><input id='num"+i+"' type='number' size=5 placeholder='jumlah'>");
 						out.println("<input type='hidden' id='idPage' name='idPage' value=" + idKat + ">");
-						out.println("<input type='submit' value='beli' onClick=\"addToCart(document.getElementById('num"+i+"').value,"+(i+1)+",'', "+TabelBarang.get(i).getJumlah()+")\">");
+						out.println("<input type='submit' value='beli' onClick=\"addToCart(document.getElementById('num"+i+"').value,"+(i+1)+",'', "+TabelBarang.get(i).getJumlah()+","+TabelBarang.get(i).getHarga()+")\">");
 					}
 				}
 				out.println("</div>");
@@ -78,6 +83,7 @@
 	<div class="centerbar">
 		<h2>YOUR CART</h2>
 		<%
+			int total = 0;
 			if (session.getAttribute("shoppingCart") != null) {
 				ShoppingCart sc = (ShoppingCart) session.getAttribute("shoppingCart");
 				out.println("");
@@ -89,9 +95,11 @@
 							break;
 						}
 					}
-					out.println("(" + (i + 1) + ") " + sc.getItems().get(i).getQuantity() + "x " + TabelBarang.get(temp).getNama_inventori()+ " Rp.1000,-<br/>");
+					out.println("(" + (i + 1) + ") " + sc.getItems().get(i).getQuantity() + "x " + TabelBarang.get(temp).getNama_inventori()+ " Rp. "+sc.getItems().get(i).getQuantity()*sc.getItems().get(i).getPrice() +",- <button onClick='deleteFromCart("+ (i) +")'>delete</button><br/>");
+					total += sc.getItems().get(i).getQuantity()*sc.getItems().get(i).getPrice();
 				}
 			}
+			out.println("<br/><b>Total price: Rp. " + total+",-</b>");
 		%>
 	</div>
 

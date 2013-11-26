@@ -1,6 +1,5 @@
-function addToCart(quantity, id, desc, stock) {
+function addToCart(quantity, id, desc, stock, price) {
 	var xmlhttp;
-	alert(stock);
 	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp = new XMLHttpRequest();
 	} else {// code for IE6, IE5
@@ -19,7 +18,28 @@ function addToCart(quantity, id, desc, stock) {
 			}
 		}
 		xmlhttp.open("GET", "Cart?quantity=" + quantity + "&id=" + id + "&desc="
-				+ desc + "&stock=" + stock, true);
+				+ desc + "&stock=" + stock + "&price=" + price + "&type=1", true);
 		xmlhttp.send();
 	}
+}
+
+function deleteFromCart(id){
+	var xmlhttp;
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			if(xmlhttp.responseText == -1){
+				alert("delete unsuccessfully");
+			} else{
+				alert("delete successfully");
+			}
+		}
+	}
+	xmlhttp.open("GET", "Cart?id="+ id + "&type=2", true);
+	xmlhttp.send();
 }

@@ -15,8 +15,34 @@
 	<%@ page import="helloJsp.model.ModelInventori"%>
 	<%@include file="templates/header.jsp"%>
 
+	<%
+		ArrayList<ModelInventori> TabelBarang = new ArrayList<ModelInventori>();
+		TabelBarang = (ArrayList<ModelInventori>) session.getAttribute("tabel");
+	%>
 	<div class="fullbar">
-		<h2>VIEW CART</h2>
+		<h2>YOUR CART</h2>
+		<%
+			int total = 0;
+			if (session.getAttribute("shoppingCart") != null) {
+				ShoppingCart sc = (ShoppingCart) session.getAttribute("shoppingCart");
+				out.println("");
+				for (int i = 0; i < sc.getItems().size(); i++) {
+					int temp = 0;
+					for (int j = 0; j < TabelBarang.size(); j++) {
+						if(TabelBarang.get(j).getId_inventori() == sc.getItems().get(i).getIdItem()){
+							temp = j;
+							break;
+						}
+					}
+					out.println("(" + (i + 1) + ") <input type='number' value=" + sc.getItems().get(i).getQuantity() + " size=5 > " + TabelBarang.get(temp).getNama_inventori()+ " Rp. "+sc.getItems().get(i).getQuantity()*sc.getItems().get(i).getPrice() +",- <button onClick=''>delete</button><br/>");
+					total += sc.getItems().get(i).getQuantity()*sc.getItems().get(i).getPrice();
+				}
+			}
+			out.println("<br/><b>Total price: Rp. " + total+",-</b>");
+			
+			out.println("<button>buy</button>");
+		%>
+	</div>
 	</div>
 	<%@include file="templates/footer.jsp"%>
 </body>
