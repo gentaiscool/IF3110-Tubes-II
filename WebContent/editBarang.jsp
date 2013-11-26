@@ -40,12 +40,14 @@
 		//if (TabelBarang.get(i).getId_kategori() == idKat){
 			out.println("<div class=\"barang\">");
 			out.println("<form action='UpdateBarang?idBarang="+idBarang+"&type=0' method='get'>");
+			out.println("<input type='hidden' name='idBarang' value="+idBarang+">");
+			out.println("<input type='hidden' name='type' value=0>");
 			out.println("<img width=100px height=100px src=public/img/"+category.toLowerCase()+"/"+barang.getGambar()+" alt="+barang.getNama_inventori()+" width = 150 height=300>");
-			out.println("<br/><pre>Gambar : </pre><input type='text' id='gambar' value='"+barang.getGambar()+"'>");
-			out.println("<br/><pre>Nama : </pre><input type='text' id='nama' value='"+barang.getNama_inventori()+"'>");
-			out.println("<br/><pre>Harga : </pre><input type='number' id='harga' value='"+barang.getHarga()+"'>");
-			out.println("<br/><pre>Jumlah : </pre><input type='number' id='jumlah' value='"+barang.getJumlah()+"'>");
-			out.println("<br/><pre>Deskripsi : </pre><textarea id='description'>"+barang.getDescription()+"</textarea>");
+			out.println("<br/><pre>Gambar : </pre><input type='text' id='gambar' name='gambar' value='"+barang.getGambar()+"'>");
+			out.println("<br/><pre>Nama : </pre><input type='text' id='nama' name='nama' value='"+barang.getNama_inventori()+"'>");
+			out.println("<br/><pre>Harga : </pre><input type='number' id='harga' name='harga' value='"+barang.getHarga()+"'>");
+			out.println("<br/><pre>Jumlah : </pre><input type='number' id='jumlah' name='jumlah' value='"+barang.getJumlah()+"'>");
+			out.println("<br/><pre>Deskripsi : </pre><textarea id='description' name='description'>"+barang.getDescription()+"</textarea>");
 			out.println("<input type='submit' value='update'></form>");
 			out.println("<button onClick=\"location.href='UpdateBarang?idBarang="+idBarang+"&type=1'\">delete</button>");
 			out.println("</div>");
@@ -54,7 +56,7 @@
 	%>
 	<script>
 		
-	<%String message = request.getParameter("message");
+	<%String message = request.getParameter("msg");
 		if (message != null)%>
 		Alert(
 	<%=message%>

@@ -41,8 +41,12 @@
 		out.println("</h2><p>" + barang.getDescription());
 		out.println("</p><br>Harga: " + barang.getHarga());
 		out.println("<br/>Stok: " + barang.getJumlah());
-		out.println("<br/><br/><textarea></textarea><form><input type='number' size=10 placeholder='jumlah'>");
-		out.println("<input type='submit' value='beli'></form>");
+		if (session.getAttribute("user") != null){
+			if (!session.getAttribute("user").equals("admin")){
+				out.println("<br/><br/><textarea></textarea><form><input type='number' size=10 placeholder='jumlah'>");
+				out.println("<input type='submit' value='beli'></form>");
+			}
+		}
 		out.println("</div>");
 		out.println("</div>");
 	%>

@@ -73,6 +73,7 @@ public class UpdateBarang extends HttpServlet {
 		Connection connection = dbconnector.mySqlConnection();
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
+		ModelInventori barang = (ModelInventori) session.getAttribute("barang");
 		// ArrayList<ModelInventori> TabelBarang = new
 		// ArrayList<ModelInventori>();
 		try {
@@ -80,21 +81,27 @@ public class UpdateBarang extends HttpServlet {
 			ResultSet rs = null;
 			if (type == 0) { // update
 				if (ok) {
-					rs = statement.executeQuery("select * from inventori where nama_inventori =" + nama + ";");
-					if (rs.next()) {
-						// nama udah ada
-						response.sendRedirect("editBarang.jsp?idBarang=" + idBarang + "&message='Nama sudah digunakan'");
+					if (!barang.getNama_inventori().equals(nama)) {
+						rs = statement.executeQuery("select * from inventori where nama_inventori ='" + nama + "';");
+						if (rs.next()){
+							// nama udah ada
+							response.sendRedirect("editBarang.jsp?idBarang=" + idBarang + "&msg='Nama sudah digunakan'");
+						} else {
+							statement.executeUpdate("update inventori set nama_inventori = '" + nama + "', gambar = '" + gambar + "', harga = " + harga + ", jumlah = " + jumlah + ", description = '" + description + "' where id_inventori =" + idBarang + ";");
+							response.sendRedirect("index.jsp?msg='Update sukses!'");
+						}
 					} else {
-						rs = statement.executeQuery("update inventori set nama_inventori = '" + nama + "' gambar = '" + gambar + "' harga = " + harga + " jumlah = " + jumlah + " description = '" + description + "' where id_inventori =" + idBarang + ";");
-						response.sendRedirect("index.jsp?message='Update sukses!'");
+						statement.executeUpdate("update inventori set nama_inventori = '" + nama + "', gambar = '" + gambar + "', harga = " + harga + ", jumlah = " + jumlah + ", description = '" + description + "' where id_inventori =" + idBarang + ";");
+						response.sendRedirect("index.jsp?msg='Update sukses!'");
 					}
 				} else {
-					response.sendRedirect("index.jsp?message='Masukan salah'");
+					response.sendRedirect("index.jsp?msg='Masukan salah'");
 				}
 			} else if (type == 1) { // deleete
-				rs = statement.executeQuery("delete from inventori where id_inventori =" + idBarang + ";");
-				response.sendRedirect("index.jsp?message='Delete sukses!'");
+				statement.executeUpdate("delete from inventori where id_inventori =" + idBarang + ";");
+				response.sendRedirect("index.jsp?msg='Delete sukses!'");
 			} else if (type == 2) { // add ???
+				
 				/*
 				 * if (ok){ rs = statement.executeQuery(
 				 * "select * from inventori where nama_inventori ="+nama+";");
