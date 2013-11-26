@@ -1,6 +1,6 @@
-function addToCart(quantity, id, desc){
+function addToCart(quantity, id, desc) {
 	var xmlhttp;
-	
+
 	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp = new XMLHttpRequest();
 	} else {// code for IE6, IE5
@@ -8,11 +8,10 @@ function addToCart(quantity, id, desc){
 	}
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			readysubmit(num, xmlhttp.responseText);
 			alert(xmlhttp.responseText);
 		}
 	}
-	xmlhttp.open("GET", "Validasi?q=" + temp + "&num=" + num + "&pass=" + pas,
-			true);
+	xmlhttp.open("GET", "Cart?quantity=" + quantity + "&id=" + id + "&desc="
+			+ desc, true);
 	xmlhttp.send();
 }

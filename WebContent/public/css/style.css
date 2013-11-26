@@ -97,6 +97,7 @@
 	display:inline-block;
 	text-align:left;	
 	margin-left:50px;
+	margin-bottom:20px;
 }
 
 .detailBarang
@@ -122,15 +123,16 @@
 
 .leftbar
 {
-	width:900px;
+	width:750px;
 	height:500px;
 	display:inline-block;
 	text-align:left;
 	background-color:transparent;
 	background-color:#DDDDDD;
 	color:#000000;
-	padding-left:10px;
+	padding-left:30px;
 	font-family:crayon;
+	margin-left:50px;
 }
 
 .centerbar

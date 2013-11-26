@@ -3,21 +3,32 @@
 		<a href="./index.jsp"><img src="public/img/canopy.png" width="100%"></a>
 	</div>
 	<div class="navigation">
-		<a href="./category.jsp?idPage=1">
+		<a href="Category?idPage=1">
 			<div id="navigator">APPETIZER</div>
 		</a>
-		<a href="./category.jsp?idPage=2">
+		<a href="Category?idPage=2">
 			<div id="navigator">PIZZA</div>
 		</a>
-		<a href="./category.jsp?idPage=3">
+		<a href="Category?idPage=3">
 			<div id="navigator">PASTA</div>
 		</a>
-		<a href="./category.jsp?idPage=4">
+		<a href="Category?idPage=4">
 			<div id="navigator">DESSERTS</div>
 		</a>
-		<a href="./category.jsp?idPage=5">
+		<a href="Category?idPage=5">
 			<div id="navigator">BEVERAGES</div>
 		</a>
+	</div>
+	<div class="sidebar">
+		<div class="picture">
+			<a href="viewCart.jsp"><img src="public/img/cart.png" width="90"></a>
+		</div>
+		<div class="picture">
+			<a href="viewProfile.jsp"><img src="public/img/user.png" width="90"></a>
+		</div>
+		<div class="picture">
+			<img src="public/img/card.png" width="90">
+		</div>
 	</div>
 	<%
 		//allow access only if session exists

@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<meta http-equiv="Refresh" content="5; url=/helloJsp/index.jsp">
+<meta http-equiv="Refresh" content="5; url=/Chintalian/index.jsp">
 <link rel="stylesheet" type="text/css" href="public/css/style.css">
 <title>Login Success Page</title>
 </head>
 <body>
-<h1 id="loginreport">Login succesful! wait in <span id="yea">5</span> seconds</h1>
+<h1 id="loginreport">Login successful! wait in <span id="yea">5</span> seconds</h1>
 <script>
 	var k =4;
 	setInterval(function(){document.getElementById("yea").innerHTML = ""+k;k--;},1000);

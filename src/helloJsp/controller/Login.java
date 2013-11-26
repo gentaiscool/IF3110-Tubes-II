@@ -55,7 +55,7 @@ public class Login extends HttpServlet {
 			if(rs.next()){
 				session.setAttribute("user", username);
 				//setting session to expiry in 30 mins
-				session.setMaxInactiveInterval(10);
+				//session.setMaxInactiveInterval(10);
 				Cookie userName = new Cookie("user", username);
 				userName.setMaxAge(30*60);
 				response.addCookie(userName);

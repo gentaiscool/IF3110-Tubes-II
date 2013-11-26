@@ -26,22 +26,12 @@
 	
 	</div>
 	<div class="leftbar">
-		<h3>MOST FAVOURITE MENU</h3>
+		<h2>MOST FAVOURITE MENU</h2>
 	</div>
 	<div class="centerbar">
 		<h2>YOUR CART</h2>
 	</div>
-	<div class="sidebar">
-		<div class="picture">
-			<img src="public/img/cart.png" width="90">
-		</div>
-		<div class="picture">
-			<img src="public/img/user.png" width="90">
-		</div>
-		<div class="picture">
-			<img src="public/img/card.png" width="90">
-		</div>
-	</div>
+	
 	<%@include file="templates/footer.jsp"%>
 </body>
 </html>
