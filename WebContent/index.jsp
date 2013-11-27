@@ -31,6 +31,7 @@
 		</div>-->
 	
 	</div>
+	
 	<div class="leftbar">
 		<h2>MOST FAVOURITE MENU</h2>
 	<%
@@ -124,6 +125,14 @@
 			out.println("<br/><b>Total price: Rp. " + total+",-</b>");
 		%>
 	</div>
+		
+	<%@include file="templates/footer.jsp"%>
+
+	<div id="starter">
+		<img class="animation" src="public/img/logo.png" width=500>
+		<h2 class="text_animation">&#9733 &#9733 &#9733 &#9733 &#9733 dinner italian cuisine</h2>
+	</div>
+	
 	<script>
 		<% String message = request.getParameter("msg");
 		if (message != null)
@@ -131,7 +140,60 @@
 		Alert(<%=message%>);
 	</script>
 
-	
-	<%@include file="templates/footer.jsp"%>
+	<script>
+		function fadein(){
+			//---- WELCOME PROCESS ----\\
+				var n = 0;
+				var m = 1;
+				// WELCOME FADE IN
+				for (x=0;x<=20;x++){
+					setTimeout(function(){
+						document.getElementById('starter').style.opacity = 0.05*n;
+						n++;
+					}, ((50*(m+1))));
+				m++;
+				}
+				
+				// WELCOME FADE OUT
+				m=0;
+				for (x=0;x<=21;x++){
+					setTimeout(function(){
+						if(x>11) document.getElementById('starter').style.display="none";
+						document.getElementById('starter').style.opacity = (0.05*n);
+						n--;
+					}, (3000+(50*(m+1))));
+					m++;
+				}
+				
+		}
+		
+		function transition(link){
+			var n = 10;
+			var m = 1;
+			// CONTENT FADE OUT
+			for (x=0;x<=10;x++){
+				setTimeout(function(){
+					document.getElementById('content_frame').style.opacity = 0.1*n;
+					n--;
+				}, (50*(m+1)));
+			m++;
+			}
+			// LOGO FADE IN
+			var o = 0;
+			var p = 1;
+			for (x=0;x<=10;x++){
+				setTimeout(function(){
+					document.getElementById('trans').style.opacity = (0.1*p);
+					p++;
+				}, (300+(50*(o+1))));
+				o++;
+			}
+			//CHANGE LINK
+				setTimeout(function(){
+					document.getElementById('content_frame').src=link;
+				}, 2000);
+		}
+	</script>
+	<script>fadein();</script>
 </body>
 </html>
