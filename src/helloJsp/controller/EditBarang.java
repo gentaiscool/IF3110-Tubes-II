@@ -100,8 +100,6 @@ public class EditBarang extends HttpServlet {
 				out.println("he");
 				
 				session.setAttribute("barang", barang);
-				//setting session to expiry in 30 mins
-				session.setMaxInactiveInterval(10);
 				response.sendRedirect("editBarang.jsp?idBarang="+idBarang);
 			}
 			

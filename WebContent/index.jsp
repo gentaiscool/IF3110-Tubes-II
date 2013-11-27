@@ -125,7 +125,7 @@
 		%>
 	</div>
 	<script>
-		<% String message = request.getParameter("message");
+		<% String message = request.getParameter("msg");
 		if (message != null)
 		%>
 		Alert(<%=message%>);
