@@ -75,7 +75,7 @@ public class Registrasi extends HttpServlet {
 				session.setAttribute("user", dataregister[0]);
 				//setting session to expiry in 30 mins
 				session.setMaxInactiveInterval(1800);
-				Cookie userName = new Cookie("user", dataregister[0]);
+				Cookie userName = new Cookie("user", dataregister[2]);
 				userName.setMaxAge(30*60);
 				response.addCookie(userName);
 				response.sendRedirect("LoginSuccessful.jsp");

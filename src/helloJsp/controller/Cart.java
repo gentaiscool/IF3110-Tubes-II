@@ -89,14 +89,15 @@ public class Cart extends HttpServlet {
 						Statement statement = connection.createStatement();
 						String query = "SELECT * FROM inventori WHERE id_inventori=" + sc.getItems().get(i).getIdItem();
 						ResultSet rs = statement.executeQuery(query);
-						
+
 						if (rs.next()) {
 							Integer jumlah = Integer.parseInt(rs.getString("jumlah"));
-							if(jumlah >= sc.getItems().get(i).getQuantity()){
+							if (jumlah >= sc.getItems().get(i).getQuantity()) {
 								query = "UPDATE inventori SET jumlah =" + (jumlah - sc.getItems().get(i).getQuantity()) + " WHERE id_inventori=" + sc.getItems().get(i).getIdItem();
 								statement.executeUpdate(query);
+
 								arr.add(i);
-							} else{
+							} else {
 								break;
 							}
 						} else {
@@ -117,9 +118,32 @@ public class Cart extends HttpServlet {
 				}
 				if (session.getAttribute("shoppingCart") != null)
 					session.removeAttribute("shoppingCart");
-				if (transactionFinished)
-					out.println(1);
-				else
+				if (transactionFinished) {
+					String query = "";
+					DbConnector dbconnector = new DbConnector();
+					Connection connection = dbconnector.mySqlConnection();
+					Statement statement2;
+
+					String username = "genta";
+					query = "SELECT * FROM pengguna WHERE username = '" + username + "';";
+					
+					ResultSet rs;
+					try {
+						statement2 = connection.createStatement();
+						rs = statement2.executeQuery(query);
+						if (rs.next()) {
+							Integer total_transaksi = Integer.parseInt(rs.getString("total_transaksi"));
+							query = "UPDATE pengguna SET total_transaksi = " + (total_transaksi + 1) + " WHERE username = '" + username + "';";
+							statement2.executeUpdate(query);
+							out.println(1);
+						} else{
+							out.println(0);
+						}
+						out.println(1);
+					} catch (Exception X) {
+						out.println(-1);
+					}
+				} else
 					out.println(0);
 			} else {
 				out.println(-1);

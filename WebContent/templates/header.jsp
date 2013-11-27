@@ -21,7 +21,7 @@
 	</div>
 	<div class="sidebar">
 		<div class="picture">
-			<a href="viewCart.jsp"><img src="public/img/cart.png" width="90"></a>
+			<a href=ShoppingCart><img src="public/img/cart.png" width="90"></a>
 		</div>
 		<div class="picture">
 			<a href="Profile"><img src="public/img/user.png" width="90"></a>
