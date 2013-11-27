@@ -23,7 +23,6 @@ public class Controller extends HttpServlet {
 	  response.setContentType("text/html");
       PrintWriter out = response.getWriter();
       String s = request.getParameter("idPage");
-      
       String forward="";
       forward = "/Delete.jsp";
       RequestDispatcher view = request.getRequestDispatcher(forward);

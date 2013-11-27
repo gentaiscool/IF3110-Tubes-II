@@ -10,6 +10,7 @@
 <script type="text/javascript" src="public/js/cart.js"></script>
 <title>Insert title here</title>
 </head>
+
 <body class="container" alink=#000000 vlink=#000000>
 	<%@ page import="java.util.ArrayList"%>
 	<%@ page import="helloJsp.model.ModelInventori"%>
@@ -40,7 +41,7 @@
 			}
 			out.println("<br/><b>Total price: Rp. " + total+",-</b>");
 			
-			out.println("<button>buy</button>");
+			out.println("<button onClick=buyCart()>buy</button>");
 		%>
 	</div>
 	</div>

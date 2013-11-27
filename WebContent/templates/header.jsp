@@ -3,19 +3,19 @@
 		<a href="./index.jsp"><img src="public/img/canopy.png" width="100%"></a>
 	</div>
 	<div class="navigation">
-		<a href="Category?idPage=1">
+		<a href="Category?idPage=1&pagi=1">
 			<div id="navigator">APPETIZER</div>
 		</a>
-		<a href="Category?idPage=2">
+		<a href="Category?idPage=2&pagi=1">
 			<div id="navigator">PIZZA</div>
 		</a>
-		<a href="Category?idPage=3">
+		<a href="Category?idPage=3&pagi=1">
 			<div id="navigator">PASTA</div>
 		</a>
-		<a href="Category?idPage=4">
+		<a href="Category?idPage=4&pagi=1">
 			<div id="navigator">DESSERTS</div>
 		</a>
-		<a href="Category?idPage=5">
+		<a href="Category?idPage=5&pagi=1">
 			<div id="navigator">BEVERAGES</div>
 		</a>
 	</div>
@@ -24,7 +24,7 @@
 			<a href="viewCart.jsp"><img src="public/img/cart.png" width="90"></a>
 		</div>
 		<div class="picture">
-			<a href="viewProfile.jsp"><img src="public/img/user.png" width="90"></a>
+			<a href="Profile"><img src="public/img/user.png" width="90"></a>
 		</div>
 		<div class="picture">
 			<img src="public/img/card.png" width="90">
@@ -61,11 +61,16 @@
 			<div class="words">
 				<h3>
 				Hi
-				<a class="light" href="./viewProfile.jsp"><%=userName%></a>, Welcome to Chintalian! :3
+				<a class="light" href="./Profile"><%=userName%></a>, Welcome to Chintalian! :3
 				</h3>
 				<button onClick="location.href='Logout'">Logout</button>
 			</div>
 			<%
 		}
 	%>
+	<script>
+		function autoComplete(){
+			
+		}
+	</script>
 </div>

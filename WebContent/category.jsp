@@ -19,6 +19,7 @@
 	<%@include file="templates/header.jsp"%>
 	<%
 		String s = request.getParameter("idPage");
+		int pagi = Integer.parseInt(request.getParameter("pagi"));
 		int idKat = Integer.parseInt(s);
 	%>
 	<%
@@ -40,6 +41,17 @@
 		out.println("<h2>" + category + "</h2>");
 	%>
 	<div class="sort">
+		<%
+		String result = "";
+		if (session.getAttribute("result") != null){
+			result = (String) session.getAttribute("result");
+			out.println(result);
+		}
+		
+		out.println("<form action='Search' method='get'>");
+		out.println("Search : <input type=text name=item onkeyup='autoComplete()'>");
+		out.println("<input type=submit value='Search'></form><br/>");
+		%>
 		<button
 			onClick="location.href='Category?idPage=<%out.print(idKat);%>&type=1'">Sort
 			by Nama</button>
@@ -49,7 +61,7 @@
 		<% 
 		if(session.getAttribute("user") != null){
 			if (session.getAttribute("user").equals("admin")) {
-				out.println("<button onClick='location.href=updateBarang?type=2'>add NEW item</button>");
+				out.println("<button onClick=\"location.href='updateBarang?type=2'\">add NEW item</button>");
 				}
 		}
 		%>
@@ -57,26 +69,45 @@
 	</div>
 
 	<%
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int count = 0;
+		int pagination_divide = 5;
 		for (int i = 0; i < TabelBarang.size(); i++) {
 			if (TabelBarang.get(i).getId_kategori() == idKat) {
-				out.println("<div class=\"barang\">");
-				out.println("<img width=100px height=100px src=public/img/" + category.toLowerCase() + "/" + TabelBarang.get(i).getGambar() + " alt=" + TabelBarang.get(i).getNama_inventori() + " width = 150 height=300>");
-				out.println("<br/><a href=detailBarang.jsp?idBarang=" + i + ">" + TabelBarang.get(i).getNama_inventori() + "</a><br>");
-				out.println("Harga: " + TabelBarang.get(i).getHarga());
-				out.println("<br/>Stok: " + TabelBarang.get(i).getJumlah());
-				if (session.getAttribute("user") != null) {
-					if (session.getAttribute("user").equals("admin")) {
-						out.println("<button onClick=\"location.href='EditBarang?idBarang=" + (i+1) + "'\">EDIT</button>");
-					} else {
-						out.println("<br/><input id='num"+i+"' type='number' size=5 placeholder='jumlah'>");
-						out.println("<input type='hidden' id='idPage' name='idPage' value=" + idKat + ">");
-						out.println("<input type='submit' value='beli' onClick=\"addToCart(document.getElementById('num"+i+"').value,"+(i+1)+",'', "+TabelBarang.get(i).getJumlah()+","+TabelBarang.get(i).getHarga()+")\">");
-					}
-				}
-				out.println("</div>");
+				count++;
+				arr.add(i);
 			}
 		}
-		out.println("</div>");
+		
+		for(int i=(arr.get(0) + pagination_divide * (pagi-1)); i<arr.get(0) + pagination_divide * (pagi); i++){
+			if(i>arr.get(arr.size()-1)) break;
+			out.println("<div class=\"barang\">");
+			out.println("<img width=100px height=100px src=public/img/" + category.toLowerCase() + "/" + TabelBarang.get(i).getGambar() + " alt=" + TabelBarang.get(i).getNama_inventori() + " width = 150 height=300>");
+			out.println("<br/><a href=detailBarang.jsp?idBarang=" + i + ">" + TabelBarang.get(i).getNama_inventori() + "</a><br>");
+			out.println("Harga: " + TabelBarang.get(i).getHarga());
+			out.println("<br/>Stok: " + TabelBarang.get(i).getJumlah());
+			if (session.getAttribute("user") != null) {
+				if (session.getAttribute("user").equals("admin")) {
+					out.println("<button onClick=\"location.href='EditBarang?idBarang=" + TabelBarang.get(i).getId_inventori() + "'\">EDIT</button>");
+				} else {
+					out.println("<br/><input id='num"+i+"' type='number' size=5 placeholder='jumlah'>");
+					out.println("<input type='hidden' id='idPage' name='idPage' value=" + idKat + ">");
+					out.println("<input type='submit' value='beli' onClick=\"addToCart(document.getElementById('num"+i+"').value,"+(i+1)+",'', "+TabelBarang.get(i).getJumlah()+","+TabelBarang.get(i).getHarga()+")\">");
+				}
+			}
+			out.println("</div>");
+		}
+		int totals = count/pagination_divide;
+		if(count % pagination_divide > 0) totals++;
+		
+		out.println("<br/><div class='pagination'>");
+		for(int i = 1; i<=totals; i++){
+			if(i == pagi)
+				out.println("<b><strong> " + i + " </strong></b>");
+			else
+				out.println("<a href='category.jsp?idPage="+idKat+"&pagi="+i+"'> "+ i +" </a>");
+		}
+		out.println("</div></div>");
 	%>
 
 

@@ -39,6 +39,7 @@ public class Category extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int idKat = Integer.parseInt(request.getParameter("idPage"));
+		int pagi = Integer.parseInt(request.getParameter("pagi"));
 		int type = 0;
 		if (request.getParameter("type") != null) type = Integer.parseInt(request.getParameter("type"));
 
@@ -73,7 +74,7 @@ public class Category extends HttpServlet {
 			session.setAttribute("tabel", TabelBarang);
 			//setting session to expiry in 30 mins
 			//session.setMaxInactiveInterval(10);
-			response.sendRedirect("category.jsp?idPage="+idKat);
+			response.sendRedirect("category.jsp?idPage="+idKat+"&pagi="+pagi);
 			
 		}catch(Exception e){
 			out.println("Ch si");

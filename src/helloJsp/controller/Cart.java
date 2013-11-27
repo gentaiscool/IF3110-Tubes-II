@@ -6,6 +6,8 @@ import helloJsp.object.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -36,7 +38,7 @@ public class Cart extends HttpServlet {
 
 		type = Integer.parseInt(request.getParameter("type"));
 		HttpSession session = request.getSession();
-		
+
 		if (type == 1) {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 			idItem = Integer.parseInt(request.getParameter("id"));
@@ -61,10 +63,10 @@ public class Cart extends HttpServlet {
 					out.println(0);
 				}
 			}
-		} else if(type == 2){
+		} else if (type == 2) {
 			ShoppingCart sc = new ShoppingCart();
 			idItem = Integer.parseInt(request.getParameter("id"));
-			if (session.getAttribute("shoppingCart") != null){
+			if (session.getAttribute("shoppingCart") != null) {
 				sc = (ShoppingCart) session.getAttribute("shoppingCart");
 				sc.getItems().remove(idItem);
 				if (session.getAttribute("shoppingCart") != null)
@@ -73,6 +75,55 @@ public class Cart extends HttpServlet {
 				out.println(idItem);
 			} else
 				out.println(-1);
+		} else if (type == 3) {
+			ShoppingCart sc = new ShoppingCart();
+			boolean transactionFinished = false;
+			if (session.getAttribute("shoppingCart") != null) {
+				sc = (ShoppingCart) session.getAttribute("shoppingCart");
+				ArrayList<Integer> arr = new ArrayList<Integer>();
+				for (int i = 0; i < sc.getItems().size(); i++) {
+					// syntax
+					DbConnector dbconnector = new DbConnector();
+					Connection connection = dbconnector.mySqlConnection();
+					try {
+						Statement statement = connection.createStatement();
+						String query = "SELECT * FROM inventori WHERE id_inventori=" + sc.getItems().get(i).getIdItem();
+						ResultSet rs = statement.executeQuery(query);
+						
+						if (rs.next()) {
+							Integer jumlah = Integer.parseInt(rs.getString("jumlah"));
+							if(jumlah >= sc.getItems().get(i).getQuantity()){
+								query = "UPDATE inventori SET jumlah =" + (jumlah - sc.getItems().get(i).getQuantity()) + " WHERE id_inventori=" + sc.getItems().get(i).getIdItem();
+								statement.executeUpdate(query);
+								arr.add(i);
+							} else{
+								break;
+							}
+						} else {
+							break;
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					String query = "";
+					if (i == sc.getItems().size() - 1)
+						transactionFinished = true;
+				}
+				if (!transactionFinished) {
+					for (int j = 0; j < arr.size(); j++) {
+						sc.getItems().remove(arr.get(j));
+					}
+				}
+				if (session.getAttribute("shoppingCart") != null)
+					session.removeAttribute("shoppingCart");
+				if (transactionFinished)
+					out.println(1);
+				else
+					out.println(0);
+			} else {
+				out.println(-1);
+			}
 		}
 	}
 
